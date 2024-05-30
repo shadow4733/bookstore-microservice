@@ -1,18 +1,23 @@
 package com.books.book_service.serviceImpl;
 
+import com.books.book_service.client.AuthorServiceClient;
 import com.books.book_service.dto.BookRequest;
 import com.books.book_service.dto.BookResponse;
 import com.books.book_service.dto.ReviewResponse;
 import com.books.book_service.model.Book;
 import com.books.book_service.repository.BookRepository;
 import com.books.book_service.service.BookService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class BookServiceImpl implements BookService {
 
     private BookRepository bookRepository;
+    private AuthorServiceClient authorServiceClient;
+
 
     @Override
     public BookResponse addNewBook(BookRequest book) {
