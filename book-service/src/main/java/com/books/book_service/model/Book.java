@@ -32,4 +32,7 @@ public class Book {
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public Book(String title, UUID uuid, String description, List<BookGenres> genres, LocalDateTime localDateTime) {
+    }
 }

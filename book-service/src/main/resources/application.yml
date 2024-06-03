@@ -1,14 +1,8 @@
 spring:
-  jpa:
-    hibernate:
-      ddl-auto: update
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url:
-    username:
-    password:
+    url: jdbc:postgresql://localhost:5432/book-service
+    username: postgres
+    password: 123
 
 eureka:
   client:
@@ -17,3 +11,13 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+server:
+  port: 8084
+
+logging:
+  level:
+    com:
+      netflix:
+        eureka: OFF
+        discovery: OFF
