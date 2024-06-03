@@ -1,7 +1,6 @@
 rootProject.name = 'bookstore-microservice'
 
 include 'book-service',
-        'notification-service',
         'account-service',
         'author-service',
         'review-service',
