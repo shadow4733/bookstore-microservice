@@ -11,5 +11,4 @@ data class ReviewRequest(
     @NotNull
     val rating: Float,
     val review: String
-
 )
