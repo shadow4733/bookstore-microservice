@@ -1,0 +1,101 @@
+version: '3'
+services:
+  eureka-service:
+    build:
+      context: ./eureka-service
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+
+  account-service:
+    build:
+      context: ./account-service
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: jdbc:postgresql://db_account:5432/account-service
+    depends_on:
+      - eureka-service
+      - db_account
+    ports:
+      - "8081:8081"
+
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    depends_on:
+        - eureka-service
+    ports:
+        - "8082:8082"
+
+  author-service:
+    build:
+      context: ./author-service
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: jdbc:postgresql://db_author:5432/author-service
+    depends_on:
+      - eureka-service
+      - db_author
+    ports:
+      - "8083:8083"
+
+  book-service:
+    build:
+      context: ./book-service
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: jdbc:postgresql://db_book:5432/book-service
+    depends_on:
+      - eureka-service
+      - db_book
+    ports:
+      - "8084:8084"
+
+  review-service:
+    build:
+      context: ./review-service
+      dockerfile: Dockerfile
+    environment:
+      DATABASE_URL: jdbc:postgresql://db_review:5432/review-service
+    depends_on:
+      - eureka-service
+      - db_review
+    ports:
+      - "8085:8085"
+
+  db_account:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: account-service
+    ports:
+      - "5432:5432"
+
+  db_author:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: author-service
+    ports:
+      - "5433:5433"
+
+  db_book:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: book-service
+    ports:
+      - "5434:5434"
+
+  db_review:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: review-service
+    ports:
+      - "5435:5435"

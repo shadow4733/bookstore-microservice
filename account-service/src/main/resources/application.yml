@@ -2,14 +2,17 @@ spring:
   application:
     name: account-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/account-service
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/account-service}
     username: postgres
     password: 123
+  jpa:
+    database:
+      platform: org.hibernate.dialect.PostgreSQLDialect
 
 eureka:
   client:
     service-url:
-      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+      defaultZone: ${EUREKA_URI:http://eureka-service:8761/eureka}
   instance:
     prefer-ip-address: true
     instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
