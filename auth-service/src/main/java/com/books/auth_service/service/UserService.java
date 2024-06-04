@@ -4,7 +4,6 @@ import com.books.auth_service.client.AccountServiceClient;
 import com.books.auth_service.dto.RegisterRequest;
 import com.books.auth_service.dto.UserResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -13,8 +12,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserService {
 
-    @Autowired
-    private AccountServiceClient accountServiceClient;
+    private final AccountServiceClient accountServiceClient;
 
     protected UserResponse saveUser(RegisterRequest register) {
         return accountServiceClient.createAccount(register).getBody();

@@ -26,20 +26,15 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
-@RequiredArgsConstructor
 @Slf4j
+@RequiredArgsConstructor
 public class SecurityConfig {
 
-    @Autowired
-    private JwtAuthFilter jwtAuthFilter;
-    @Autowired
-    private UserDetailsServiceImpl userService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
-    @Autowired
-    private CustomAccessDeniedHandler customAccessDeniedHandler;
+    private final JwtAuthFilter jwtAuthFilter;
+    private final UserDetailsServiceImpl userService;
+    private final PasswordEncoder passwordEncoder;
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+    private final CustomAccessDeniedHandler customAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
